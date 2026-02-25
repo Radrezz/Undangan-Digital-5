@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guest Link Generator | Frezza & Hanna Archive</title>
+    <title>Pembuat Tautan Tamu | Arsip Frezza & Hanna</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -190,47 +190,53 @@
 
 <body>
     <div class="generator-box">
-        <h1>Link Archiver</h1>
+        <h1>Buku Tamu</h1>
 
         <div class="input-group">
-            <label>Guest Designation</label>
-            <input type="text" id="guestName" placeholder="e.g. Mr. John Doe" autocomplete="off">
+            <label>Nama Tamu / Penerima:</label>
+            <input type="text" id="guestName" placeholder="Contoh: Keluarga Bapak Budi" autocomplete="off">
         </div>
 
-        <button class="btn-main" onclick="generateArchive()">Issue Invitation</button>
+        <button class="btn-main" onclick="generateArchive()">Buat Link Undangan</button>
 
         <div class="results" id="resultBox">
-            <label>The Message Template</label>
+            <label>Hasil Pesan WhatsApp:</label>
             <textarea id="resultText" readonly></textarea>
 
             <div class="action-grid">
-                <button class="btn-sec" onclick="copyArchive()">Copy Archive</button>
+                <button class="btn-sec" onclick="copyArchive()">Salin Teks</button>
                 <a href="#" class="btn-sec btn-wa" id="btnWa" target="_blank">WhatsApp</a>
             </div>
         </div>
 
-        <a href="index.html" class="back-link">Return to Collection</a>
+        <a href="index.html" class="back-link">Kembali ke Website</a>
     </div>
 
     <script>
         function generateArchive() {
             const rawName = document.getElementById('guestName').value.trim();
-            if (!rawName) return alert("Please specify a name.");
+            if (!rawName) return alert("Mohon masukkan nama tamu.");
 
             let baseUrl = window.location.href.split(/[?#]/)[0].replace('ubah-namatamu.html', 'index.html');
             const fullLink = `${baseUrl}?to=${encodeURIComponent(rawName)}`;
 
-            const messageTemplate = `The Sacred Union of
-*FREZZA & HANNA*
+            const messageTemplate = `Bismillahirrahmanirrahim.
+Assalamu’alaikum Warahmatullahi Wabarakatuh.
+ 
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i:
 
-Dear *${rawName}*,
-We cordially invite you to witness the archive of our union. Your presence would be our greatest honor.
+*${rawName}*
 
-Open Digital Archive:
+untuk hadir dan memberikan doa restu pada acara pernikahan kami:
+*Frezza & Hanna*.
+
+Berikut link undangan kami untuk info lengkap acara:
 ${fullLink}
-
-Twenty Fourth of December . 2026
-Jakarta, Indonesia`;
+ 
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir di acara pernikahan kami.
+ 
+Wassalamu’alaikum Warahmatullahi Wabarakatuh.
+Terima kasih.`;
 
             document.getElementById('resultText').value = messageTemplate;
             document.getElementById('resultBox').style.display = 'block';
@@ -241,7 +247,7 @@ Jakarta, Indonesia`;
             const text = document.getElementById('resultText');
             text.select();
             navigator.clipboard.writeText(text.value);
-            alert("Archive copied to clipboard.");
+            alert("Teks berhasil disalin.");
         }
     </script>
 </body>

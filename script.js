@@ -188,11 +188,11 @@ if (wishForm) {
         const rawMessage = document.getElementById('wish-message').value;
 
         // Combine presence into message for uniform storage
-        const statusIcon = presence === 'Hadir' ? '✓ ATTENDING' : '✗ ABSENT';
+        const statusIcon = presence === 'Hadir' ? '✓ HADIR' : '✗ TIDAK HADIR';
         const message = `[${statusIcon}] ${rawMessage}`;
 
         btn.disabled = true;
-        btn.innerText = 'DOCUMENTING...';
+        btn.innerText = 'MENGIRIM...';
 
         const { error } = await _supabase.from('guest_wishes').insert([{ name, message, invitation_id: INVITATION_ID }]);
 
@@ -201,7 +201,7 @@ if (wishForm) {
             fetchWishes();
         }
         btn.disabled = false;
-        btn.innerText = 'COMMIT TO ARCHIVE';
+        btn.innerText = 'KIRIM UCAPAN';
     });
 }
 
@@ -221,3 +221,13 @@ musicToggle.addEventListener('click', () => {
 // 6. Signature Guest Mapping
 const params = new URLSearchParams(window.location.search);
 if (params.get('to')) document.getElementById('guest-name').innerText = params.get('to');
+
+function copyClipboard(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = 'TERSALIN!';
+        setTimeout(() => {
+            btn.innerText = originalText;
+        }, 2000);
+    });
+}
