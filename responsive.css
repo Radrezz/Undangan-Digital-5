@@ -1,0 +1,146 @@
+/* Responsive Adjustments */
+
+@media (max-width: 1024px) {
+    .comic-title {
+        font-size: 4rem;
+    }
+
+    .main-title .name {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --shadow: 6px 6px 0px var(--color4);
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .comic-title {
+        font-size: 3rem;
+    }
+
+    .ampersand {
+        font-size: 2rem;
+    }
+
+    .main-title .name {
+        font-size: 3.5rem;
+    }
+
+    .main-title .vs {
+        font-size: 1.5rem;
+    }
+
+    .hero-panel {
+        padding: 2rem 1.5rem;
+    }
+
+    .profile-grid {
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    .comic-vs {
+        transform: rotate(90deg);
+        margin: -1rem 0;
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .comic-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+    }
+
+    .gallery-item {
+        height: 250px;
+    }
+
+    .p1,
+    .p4 {
+        grid-column: span 2;
+    }
+
+    .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .countdown-card span {
+        font-size: 2.5rem !important;
+    }
+
+    .guest-name {
+        font-size: 1.8rem;
+    }
+
+    .btn-comic {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .comic-title {
+        font-size: 2.5rem;
+    }
+
+    .main-title .name {
+        font-size: 2.8rem;
+    }
+
+    .hero-date .date {
+        font-size: 1.5rem;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .section-badge {
+        font-size: 1.2rem;
+    }
+}
+
+/* Animations Helper */
+.is-locked {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Scroll Indicator Animation */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    color: var(--color4);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0) translateX(-50%);
+    }
+
+    40% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+
+    60% {
+        transform: translateY(-5px) translateX(-50%);
+    }
+}

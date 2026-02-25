@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Link Generator | Frezza & Hanna Archive</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:wght@200;300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bg: #FFFFFF;
+            --color-text: #1A1A1A;
+            --color-accent: #8B735B;
+            --color-primary: #540B0E;
+            --color-border: #D1CDC7;
+            --font-heading: 'Cinzel Decorative', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-serif: 'Libre Baskerville', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .generator-box {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 4rem 3rem;
+            border: 1px solid var(--color-border);
+            position: relative;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.02);
+        }
+
+        .generator-box::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid var(--color-accent);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            letter-spacing: 0.5rem;
+            margin-bottom: 2.5rem;
+            color: var(--color-primary);
+        }
+
+        .input-group {
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--color-border);
+            padding: 1rem 0;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-bottom-color: var(--color-primary);
+        }
+
+        .btn-main {
+            background: transparent;
+            border: 1px solid var(--color-text);
+            color: var(--color-text);
+            padding: 1.2rem 3rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.5s;
+            width: 100%;
+        }
+
+        .btn-main:hover {
+            background: var(--color-text);
+            color: white;
+        }
+
+        .results {
+            margin-top: 4rem;
+            display: none;
+            text-align: left;
+            padding-top: 3rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            background: #FBFBFA;
+            border: 1px solid var(--color-border);
+            padding: 1.5rem;
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            resize: none;
+            outline: none;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-sec {
+            padding: 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            transition: 0.3s;
+        }
+
+        .btn-sec:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .btn-wa {
+            background: #FBFBFA;
+            color: #25D366 !important;
+            border-color: #25D366;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 3rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.4rem;
+            text-decoration: none;
+            color: var(--color-accent);
+            text-transform: uppercase;
+        }
+
+        .back-link:hover {
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="generator-box">
+        <h1>Link Archiver</h1>
+
+        <div class="input-group">
+            <label>Guest Designation</label>
+            <input type="text" id="guestName" placeholder="e.g. Mr. John Doe" autocomplete="off">
+        </div>
+
+        <button class="btn-main" onclick="generateArchive()">Issue Invitation</button>
+
+        <div class="results" id="resultBox">
+            <label>The Message Template</label>
+            <textarea id="resultText" readonly></textarea>
+
+            <div class="action-grid">
+                <button class="btn-sec" onclick="copyArchive()">Copy Archive</button>
+                <a href="#" class="btn-sec btn-wa" id="btnWa" target="_blank">WhatsApp</a>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">Return to Collection</a>
+    </div>
+
+    <script>
+        function generateArchive() {
+            const rawName = document.getElementById('guestName').value.trim();
+            if (!rawName) return alert("Please specify a name.");
+
+            let baseUrl = window.location.href.split(/[?#]/)[0].replace('ubah-namatamu.html', 'index.html');
+            const fullLink = `${baseUrl}?to=${encodeURIComponent(rawName)}`;
+
+            const messageTemplate = `The Sacred Union of
+*FREZZA & HANNA*
+
+Dear *${rawName}*,
+We cordially invite you to witness the archive of our union. Your presence would be our greatest honor.
+
+Open Digital Archive:
+${fullLink}
+
+Twenty Fourth of December . 2026
+Jakarta, Indonesia`;
+
+            document.getElementById('resultText').value = messageTemplate;
+            document.getElementById('resultBox').style.display = 'block';
+            document.getElementById('btnWa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(messageTemplate)}`;
+        }
+
+        function copyArchive() {
+            const text = document.getElementById('resultText');
+            text.select();
+            navigator.clipboard.writeText(text.value);
+            alert("Archive copied to clipboard.");
+        }
+    </script>
+</body>
+
+</html>
